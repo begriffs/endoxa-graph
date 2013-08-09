@@ -4,7 +4,9 @@ if (typeof define !== 'function') {
   var define = require('amdefine')(module);
 }
 
-define(function() {
+define(['endoxa-core'], function(core) {
+  /*jshint unused:vars */
+
   function edgeClassification(search, x, y) {
     if(search.parent[y] === x) { return 'tree'; }
     if(search.discovered[y] && !search.processed[y]) { return 'back'; }
