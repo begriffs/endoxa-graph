@@ -129,7 +129,7 @@ define(['endoxa-core'], function(core) {
         },
         processEdge = function(search, x, y) {
           if(edgeClassification(search, x, y) === 'back') {
-            throw 'unexpected cyce';
+            throw 'unexpected cycle';
           }
         };
 
