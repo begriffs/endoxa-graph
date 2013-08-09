@@ -1,0 +1,10 @@
+digraph {
+  rankdir=LR
+  "socks (5)"     -> "underwear (4)"
+  "underwear (4)" -> "pants (3)"
+  "pants (3)"     -> "shoes (7)"
+  "shoes (7)"     -> "shirt (2)"
+  "shirt (2)"     -> "tie (1)"
+  "tie (1)"       -> "belt (0)"
+  "belt (0)"      -> "jacket (6)"
+}

@@ -1,0 +1,11 @@
+digraph {
+  "belt (0)"      -> "jacket (6)"
+  "tie (1)"       -> "jacket (6)"
+  "shirt (2)"     -> "belt (0)"
+  "shirt (2)"     -> "tie (1)"
+  "pants (3)"     -> "belt (0)"
+  "pants (3)"     -> "shoes (7)"
+  "underwear (4)" -> "pants (3)"
+  "underwear (4)" -> "shoes (7)"
+  "socks (5)"     -> "shoes (7)"
+}
