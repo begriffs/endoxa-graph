@@ -1,5 +1,7 @@
 ## do things with graphs
 
+[![Build Status](https://travis-ci.org/endoxajs/endoxa-graph.png)](https://travis-ci.org/endoxajs/endoxa-graph)
+
 On the **server** side
 
 ```sh
