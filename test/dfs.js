@@ -1,29 +1,40 @@
 var EndoxaGraph = require('../module'),
-  chai       = require('chai'),
-  expect     = chai.expect;
+  chai   = require('chai'),
+  expect = chai.expect;
 
 describe('EndoxaGraph', function() {
+  var emptyGraph = EndoxaGraph.empty();
 
   describe('#findCycle()', function() {
     it('finds no cycles in an empty graph', function() {
-      var emptyGraph = EndoxaGraph.empty();
       expect(EndoxaGraph.findCycle(emptyGraph)).to.be.undefined;
     });
+    it('finds no cycles in a simple dag', function() {
+      expect(EndoxaGraph.findCycle(
+        EndoxaGraph.fromConnectionsList([ [0, 1], [1, 2] ])
+      )).to.be.undefined;
+    });
     it('finds a simple cycle', function() {
-      simpleCycle = EndoxaGraph.empty();
-      EndoxaGraph.insertEdge(simpleCycle, 0, 1);
-      EndoxaGraph.insertEdge(simpleCycle, 1, 0);
-
-      expect(EndoxaGraph.findCycle(simpleCycle)).to.not.be.empty;
+      expect(EndoxaGraph.findCycle(
+        EndoxaGraph.fromConnectionsList([ [0,1], [1, 0] ])
+      )).to.not.be.empty;
     });
 
     it('finds a longer cycle', function() {
-      longerCycle = EndoxaGraph.empty();
-      EndoxaGraph.insertEdge(longerCycle, 0, 1);
-      EndoxaGraph.insertEdge(longerCycle, 1, 2);
-      EndoxaGraph.insertEdge(longerCycle, 2, 0);
+      expect(EndoxaGraph.findCycle(
+        EndoxaGraph.fromConnectionsList([ [0, 1], [1, 2], [2, 0] ])
+      )).to.not.be.empty;
+    });
+  });
 
-      expect(EndoxaGraph.findCycle(longerCycle)).to.not.be.empty;
+  describe('#toposort()', function() {
+    it('responds with empty list for empty graph', function() {
+      expect(EndoxaGraph.toposort(emptyGraph)).to.be.empty;
+    });
+    it('can put them in order', function() {
+      expect(EndoxaGraph.toposort(
+        EndoxaGraph.fromConnectionsList([ [0, 1], [0, 2] ])
+      )).to.eql([0,1,2]);
     });
   });
 

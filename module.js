@@ -5,12 +5,28 @@ if (typeof define !== 'function') {
 }
 
 define(function() {
+  function edgeClassification(search, x, y) {
+    if(search.parent[y] === x) { return 'tree'; }
+    if(search.discovered[y] && !search.processed[y]) { return 'back'; }
+    if(search.processed[y] && search.entryTime[y] > search.entryTime[x]) { return 'forward'; }
+    if(search.processed[y] && search.entryTime[y] < search.entryTime[x]) { return 'crossed'; }
+    return 'unclassified';
+  }
+
   var self = {
     empty: function(directed) {
       if(typeof directed !== 'boolean') {
         directed = true;
       }
-      return { nvertices: 0, nedges: 0, edges: {}, degree: {}, directed: directed };
+      return { nvertices: 0, nedges: 0, edges: [], degree: [], directed: directed };
+    },
+
+    fromConnectionsList: function(list, directed) {
+      var result = self.empty(directed);
+      for(var i in list) {
+        self.insertEdge(result, list[i][0], list[i][1]);
+      }
+      return result;
     },
 
     insertEdge: function(G, x, y) {
@@ -21,6 +37,7 @@ define(function() {
       };
       G.degree[x] = (G.degree[x] || 0) + 1;
       G.nedges++;
+      G.nvertices = Math.max(G.nvertices, x, y);
     },
 
     inspect: function(G) {
@@ -36,16 +53,16 @@ define(function() {
       return result;
     },
 
-    dfs: function dfs(G, v, processors) {
-      var time = 0, dfs0,
-        search = {
-          discovered: {},
-          entryTime: {},
-          exitTime: {},
-          processed: {},
-          parent: {},
-          finished: false
-        };
+    dfs: function dfs(G, v, processors, search) {
+      var time = 0, dfs0;
+      search = search || {
+        discovered: [],
+        entryTime: [],
+        exitTime: [],
+        processed: [],
+        parent: [],
+        finished: false
+      };
 
       processors             = processors             || {};
       processors.processEdge = processors.processEdge || function() {};
@@ -80,8 +97,6 @@ define(function() {
         time++;
         search.exitTime[v] = time;
         search.processed[v] = true;
-
-        return search;
       };
 
       dfs0(G, v);
@@ -90,12 +105,39 @@ define(function() {
 
     findCycle: function(G) {
       var cycleFinder = function(search, x, y) {
-        if(search.parent[x] !== y) {
+        if(edgeClassification(search, x, y) === 'back') {
           search.cycle = [y, x];
           search.finished = true;
         }
       };
-      return self.dfs(G, 0, { processEdge: cycleFinder }).cycle;
+      var t = self.dfs(G, 0, { processEdge: cycleFinder }).cycle;
+      return t;
+    },
+
+    toposort: function(G) {
+      if(!G.directed) {
+        throw 'Cannot topologically sort an undirected graph';
+      }
+
+      var i,
+        search,
+        sorted = [],
+        vertexLate = function(search, v) {
+          sorted.unshift(v);
+        },
+        processEdge = function(search, x, y) {
+          if(edgeClassification(search, x, y) === 'back') {
+            throw 'unexpected cyce';
+          }
+        };
+
+      for(i = 0; i < G.nvertices; i++) {
+        if(!search || !search.discovered[i]) {
+          search = self.dfs(G, i, { vertexLate: vertexLate, processEdge: processEdge }, search);
+        }
+      }
+
+      return sorted;
     }
   };
   return self;
