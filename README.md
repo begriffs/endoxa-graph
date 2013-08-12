@@ -59,3 +59,7 @@ elegant base for JavaScript functional programming on both the client
 and server. The idea is that abstractions need to prove themselves in
 substantial code, and this library works backwards from interesting
 algorithms to the abstract nonsense that makes it beautiful.
+
+<p align="center">
+  <img src="illustration/endoxa-js.png" alt="EndoxaJS Logo" />
+</p>
