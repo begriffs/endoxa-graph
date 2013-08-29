@@ -99,30 +99,30 @@ describe('EndoxaGraph', function() {
     });
   });
 
-  describe('#countConnections', function(){
-    it('counts the number of connections between 2 given vertices in a single-path example', function() {
-      expect(EndoxaGraph.countConnections(1,4,
+  describe('#findShortestPath', function(){
+    it('finds shortest path between 2 given vertices in a single-path example', function() {
+      expect(EndoxaGraph.findShortestPath(1,4,
         EndoxaGraph.fromConnectionsList([
           [0,1],
           [1,2],
           [2,3],
           [3,4]
-      ])).to.eql(3);
+      ])).to.eql([1,2,3,4]);
     });
 
-    it('counts the least number of connections between 2 given vertices in a multi-path example', function() {
-      expect(EndoxaGraph.countConnections(1,4,
+    it('finds shortest path between 2 given vertices in a multi-path example', function() {
+      expect(EndoxaGraph.findShortestPath(1,4,
         EndoxaGraph.fromConnectionsList([
           [0,1],
           [1,2],
           [2,3],
           [3,4],
           [1,3]
-      ])).to.eql(2);
+      ])).to.eql([1,3,4]);
     });
 
-    it('counts the least number of connections between 2 given vertices in a cycle example', function() {
-      expect(EndoxaGraph.countConnections(1,5,
+    it('finds shortest path between 2 given vertices in a cycle example', function() {
+      expect(EndoxaGraph.findShortestPath(1,5,
         EndoxaGraph.fromConnectionsList([
           [0,1],
           [1,2],
@@ -130,7 +130,7 @@ describe('EndoxaGraph', function() {
           [3,4],
           [4,5],
           [5,0]
-      ])).to.eql(2);
+      ])).to.eql([1,0,5]);
     });
   });
 
