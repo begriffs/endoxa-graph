@@ -38,7 +38,7 @@ On the **developer** side
     # install grunt (use "sudo" if necessary)
     npm install -g grunt-cli
     
-    # make sure everything installed
+    # make sure everything installed correctly
     grunt test
 ```
 
