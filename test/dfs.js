@@ -92,7 +92,7 @@ describe('EndoxaGraph', function() {
           EACH CONNECTION IS 2-ELEMENT ARRAY
             e.g., [0,1]
           EACH CONNECTION LIST IS AN ARRAY
-          OF THE 2-ELEMENT CONNECTIONS
+          OF THE 2-ELEMENT ARRAYSgib
             e.g., [[0,1],[1,2]]
           */
       )).to.eql(/*EXPECTED OUTPUT*/);
