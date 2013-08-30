@@ -42,6 +42,9 @@ On the **developer** side
     grunt test
 ```
 
+### contribute tests
+In the `endoxa-graph/test/dfs.js` folder, 
+
 ### do things in the right order
 
 When you get dressed you have to do some things before others.
