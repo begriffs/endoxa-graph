@@ -62,7 +62,7 @@ describe('#ALGO_NAME', function(){
   });
 ```
 
-Keep in mind that `EndoxaGraph.ALGO_NAME()` could use different parameters, not just `EndoxaGraph.fromConnectionsList()`. Also, the expected result does not necessarily need to use `.to.eql()`.
+Keep in mind that your proposed feature/algorithm called `EndoxaGraph.ALGO_NAME()` could use different parameters, not just `EndoxaGraph.fromConnectionsList()`. Also, the expected result does not necessarily need to use `.to.eql()`.
 
 When adding test cases, create a pull request to the *endoxa-graph:unimplemented_tests* branch. **Do not** create a new pull request to the *master* branch if you are only adding test cases.
 
