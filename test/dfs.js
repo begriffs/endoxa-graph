@@ -92,7 +92,8 @@ describe('EndoxaGraph', function() {
           [1,2],
           [2,3],
           [3,4]
-      ])).to.eql([1,2,3,4]);
+        ])
+      )).to.eql([1,2,3,4]);
     });
 
     it('finds shortest path between 2 given vertices in a multi-path example', function() {
@@ -103,7 +104,8 @@ describe('EndoxaGraph', function() {
           [2,3],
           [3,4],
           [1,3]
-      ])).to.eql([1,3,4]);
+        ])
+      )).to.eql([1,3,4]);
     });
 
     it('finds shortest path between 2 given vertices in a cycle example', function() {
@@ -115,7 +117,8 @@ describe('EndoxaGraph', function() {
           [3,4],
           [4,5],
           [5,0]
-      ])).to.eql([1,0,5]);
+        ])
+      )).to.eql([1,0,5]);
     });
   });
 
