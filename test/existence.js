@@ -1,9 +1,9 @@
-var EndoxaGraph = require('../module'),
+var graph = require('../module'),
   chai       = require('chai'),
-  expect     = chai.expect;
+  assert     = chai.assert;
 
 describe('EndoxaGraph', function() {
   it('exists', function() {
-    expect(EndoxaGraph).to.be.an('object');
+    assert.isObject(graph)
   });
 });
