@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "module.js",
   "dependencies": {
-    "requirejs": "~2.1.8"
+    "requirejs": "~2.1.8",
+    "endoxa-core": "git://github.com/endoxajs/endoxa-core.git#master"
   },
   "ignore": [
     "**/.*",
