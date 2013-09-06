@@ -1,18 +1,20 @@
-var graph  = require('../module')
-  chai     = require('chai')
-  assert   = chai.assert
-  claire   = require('claire')
-  data     = claire.data
-  PairList = data.Array(claire.sequence(data.Byte, data.Byte))
-  _        = require('lodash')
-;
+var graph  = require('../module'),
+  chai     = require('chai'),
+  assert   = chai.assert,
+  claire   = require('claire'),
+  data     = claire.data,
+  PairList = data.Array(claire.sequence(data.Byte, data.Byte)),
+  _        = require('lodash');
 
 describe('EndoxaGraph', function() {
+  'use strict';
+
   it('exists', function() {
-    assert.isObject(graph)
+    assert.isObject(graph);
   });
 
   describe('fromConnectionsList', function(){
+    var g;
     it('has as many edges as pairs passed',
       claire.forAll(PairList).satisfy(function(pairs){
         g = graph.fromConnectionsList(pairs);
