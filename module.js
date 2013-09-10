@@ -6,6 +6,7 @@ if (typeof define !== 'function') {
 
 define(['endoxa-core'], function(core) {
   /*jshint unused:vars */
+  var list = core.list;
 
   function edgeClassification(search, x, y) {
     if(search.parent[y] === x) { return 'tree'; }
@@ -32,11 +33,7 @@ define(['endoxa-core'], function(core) {
     },
 
     insertEdge: function(G, x, y) {
-      G.edges[x] = {
-        weight: null,
-        y: y,
-        next: G.edges[x]
-      };
+      G.edges[x] = list.cons({weight: null, y: y}, G.edges[x]);
       G.degree[x] = (G.degree[x] || 0) + 1;
       G.nedges++;
       G.nvertices = Math.max(G.nvertices, x, y);
@@ -46,9 +43,9 @@ define(['endoxa-core'], function(core) {
       var result = {};
       for(var i = 0; i < G.nvertices; i++) {
         var p = G.edges[i], ar = [];
-        while(p) {
-          ar.push(p.y);
-          p = p.next;
+        while(p && p !== list.empty) {
+          ar.push(p.head.y);
+          p = p.tail;
         }
         result[i] = ar;
       }
@@ -84,8 +81,8 @@ define(['endoxa-core'], function(core) {
         processors.vertexEarly(search, v);
         p = G.edges[v];
 
-        while(p) {
-          y = p.y;
+        while(p && p !== list.empty) {
+          y = p.head.y;
           if(!search.discovered[y]) {
             search.parent[y] = v;
             processors.processEdge(search, v, y);
@@ -93,7 +90,7 @@ define(['endoxa-core'], function(core) {
           } else if(!search.processed[y] || G.directed) {
             processors.processEdge(search, v, y);
           }
-          p = p.next;
+          p = p.tail;
         }
         processors.vertexLate(search, v);
         time++;

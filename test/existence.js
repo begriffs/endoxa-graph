@@ -1,4 +1,5 @@
 var graph  = require('../module'),
+  list     = require('endoxa-core').list,
   chai     = require('chai'),
   assert   = chai.assert,
   claire   = require('claire'),
@@ -35,5 +36,15 @@ describe('EndoxaGraph', function() {
         return true;
       }).asTest()
     );
+
+    it('produces the right adjacency lists', function(){
+      var pairs = [[0,1], [1,2], [1,3],[2,1], [3,0], [0, 4]];
+      var g = graph.fromConnectionsList(pairs);
+      _.each(pairs, function(pair) {
+        assert(
+          list.any(function(edge){return edge.y === pair[1];}, g.edges[pair[0]])
+        );
+      });
+    });
   });
 });
