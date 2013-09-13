@@ -1,10 +1,11 @@
-'use strict';
 if (typeof define !== 'function') {
   /* jshint latedef:false */
   var define = require('amdefine')(module);
 }
 
 define(['endoxa-core'], function(core) {
+  'use strict';
+
   /*jshint unused:vars */
   var list = core.list;
 
