@@ -6,7 +6,6 @@ if (typeof define !== 'function') {
 define(['endoxa-core'], function(core) {
   'use strict';
 
-  /*jshint unused:vars */
   var list = core.list;
 
   function edgeClassification(search, x, y) {
