@@ -1,11 +1,11 @@
-'use strict';
 if (typeof define !== 'function') {
   /* jshint latedef:false */
   var define = require('amdefine')(module);
 }
 
 define(['endoxa-core'], function(core) {
-  /*jshint unused:vars */
+  'use strict';
+
   var list = core.list;
 
   function edgeClassification(search, x, y) {
