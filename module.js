@@ -26,6 +26,13 @@ define(['endoxa-core'], function(core) {
 
     fromConnectionsList: function(list, directed) {
       var result = self.empty(directed);
+
+      // if list is not an array of arrays but instead the
+      // first connection, then assume there are a variable
+      // number of arguments listing connections
+      if(typeof list[0] === 'number') {
+        list = Array.prototype.slice.call(arguments, 0);
+      }
       for(var i in list) {
         self.insertEdge(result, list[i][0], list[i][1]);
       }

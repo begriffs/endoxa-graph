@@ -16,6 +16,7 @@ describe('EndoxaGraph', function() {
 
   describe('fromConnectionsList', function(){
     var g;
+
     it('has as many edges as pairs passed',
       claire.forAll(PairList).satisfy(function(pairs){
         g = graph.fromConnectionsList(pairs);
@@ -39,12 +40,19 @@ describe('EndoxaGraph', function() {
 
     it('produces the right adjacency lists', function(){
       var pairs = [[0,1], [1,2], [1,3],[2,1], [3,0], [0, 4]];
-      var g = graph.fromConnectionsList(pairs);
+      g = graph.fromConnectionsList(pairs);
       _.each(pairs, function(pair) {
         assert(
           list.any(function(edge){return edge.y === pair[1];}, g.edges[pair[0]])
         );
       });
+    });
+
+    it('accepts a variable-length list of pairs as arguments too', function () {
+      assert.deepEqual(
+        graph.fromConnectionsList([0,1], [1,2]),
+        graph.fromConnectionsList([ [0,1], [1,2] ])
+      );
     });
   });
 });
