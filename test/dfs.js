@@ -86,4 +86,54 @@ describe('EndoxaGraph', function() {
     });
   });
 
+  describe('#ALGO_NAME', function(){
+    it('DESCRIPTION OF BEHAVIOR', function() {
+      expect(EndoxaGraph.ALGO_NAME(
+        EndoxaGraph.fromConnectionsList(
+          /* 2D ARRAY:
+          EACH CONNECTION IS 2-ELEMENT ARRAY
+            e.g., [0,1]
+          EACH CONNECTION LIST IS AN ARRAY
+          OF THE 2-ELEMENT CONNECTIONS
+            e.g., [[0,1],[1,2]]
+          */
+      )).to.eql(/*EXPECTED OUTPUT*/);
+    });
+  });
+
+  describe('#findShortestPath', function(){
+    it('finds shortest path between 2 given vertices in a single-path example', function() {
+      expect(EndoxaGraph.findShortestPath(1,4,
+        EndoxaGraph.fromConnectionsList([
+          [0,1],
+          [1,2],
+          [2,3],
+          [3,4]
+      ])).to.eql([1,2,3,4]);
+    });
+
+    it('finds shortest path between 2 given vertices in a multi-path example', function() {
+      expect(EndoxaGraph.findShortestPath(1,4,
+        EndoxaGraph.fromConnectionsList([
+          [0,1],
+          [1,2],
+          [2,3],
+          [3,4],
+          [1,3]
+      ])).to.eql([1,3,4]);
+    });
+
+    it('finds shortest path between 2 given vertices in a cycle example', function() {
+      expect(EndoxaGraph.findShortestPath(1,5,
+        EndoxaGraph.fromConnectionsList([
+          [0,1],
+          [1,2],
+          [2,3],
+          [3,4],
+          [4,5],
+          [5,0]
+      ])).to.eql([1,0,5]);
+    });
+  });
+
 });

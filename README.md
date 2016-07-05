@@ -29,6 +29,43 @@ require(['endoxa-graph'], function(EndoxaGraph) {
 });
 ```
 
+On the **developer** side
+
+```sh
+    # command line (use "sudo" if necessary)
+    npm install
+    
+    # install grunt (use "sudo" if necessary)
+    npm install -g grunt-cli
+    
+    # make sure everything installed correctly
+    grunt test
+```
+
+### contribute tests
+In the *endoxa-graph/test/dfs.js* file, you can add tests for features you'd like to see implemented. The tests generally follow the format shown below:
+
+```js
+describe('#ALGO_NAME', function(){
+    it('DESCRIPTION OF BEHAVIOR', function() {
+      expect(EndoxaGraph.ALGO_NAME(
+        EndoxaGraph.fromConnectionsList(
+          /* 2D ARRAY:
+          EACH CONNECTION IS 2-ELEMENT ARRAY
+            e.g., [0,1]
+          EACH CONNECTION LIST IS AN ARRAY
+          OF THE 2-ELEMENT CONNECTIONS
+            e.g., [[0,1],[1,2]]
+          */
+      )).to.eql(/*EXPECTED OUTPUT*/);
+    });
+  });
+```
+
+Keep in mind that your proposed feature/algorithm called `EndoxaGraph.ALGO_NAME()` could use different parameters, not just `EndoxaGraph.fromConnectionsList()`. Also, the expected result does not necessarily need to use `.to.eql()`.
+
+When adding test cases, create a pull request to the *endoxa-graph:unimplemented_tests* branch. **Do not** create a new pull request to the *master* branch if you are only adding test cases.
+
 ### do things in the right order
 
 When you get dressed you have to do some things before others.
