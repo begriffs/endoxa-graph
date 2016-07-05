@@ -29,6 +29,19 @@ require(['endoxa-graph'], function(EndoxaGraph) {
 });
 ```
 
+On the **developer** side
+
+```sh
+    # command line (use "sudo" if necessary)
+    npm install
+    
+    # install grunt (use "sudo" if necessary)
+    npm install -g grunt-cli
+    
+    # make sure everything installed correctly
+    grunt test
+```
+
 ### do things in the right order
 
 When you get dressed you have to do some things before others.
